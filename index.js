@@ -31,15 +31,15 @@ client.once('ready', () => {
 class DmCommand extends Commando.Command {
   constructor(client) {
     super(client, {
-      name: 'dm-me',
+      name: 'legacy-dm-me',
       group: 'lancer',
-      memberName: 'dm-me',
-      aliases: ['dm_me', 'enable-dms', 'enable_dms', 'enable-dm', 'enable_dm'],
+      memberName: 'legacy-dm-me',
       description: 'UNCLEBot DMs you one message, enabling you to send commands via DM.',
       guildOnly: false
     })
   }
   async run(msg) {
+    console.log("Message Command -- DM")
     await msg.author.send("Added your DM to my cached channels. You can now DM me commands.")
   }
 }
@@ -47,10 +47,9 @@ class DmCommand extends Commando.Command {
 class SearchCommand extends Commando.Command {
   constructor(client) {
     super(client, {
-      name: 'search-compendium',
+      name: 'legacy-search-compendium',
       group: 'lancer',
-      memberName: 'search',
-      aliases: ['search', 'compendium'],
+      memberName: 'legacy-search',
       description: 'Searches the LANCER compendium, including supplements.',
       patterns: [/\[\[(.+:)?(.+?)\]\]/],
       defaultHandling: false,
@@ -59,6 +58,7 @@ class SearchCommand extends Commando.Command {
     })
   }
   async run(msg) {
+    console.log("Message Command -- Search")
     //console.log(msg.content)
     let targets = [];
     //Identify a searchable term.
@@ -85,9 +85,9 @@ class SearchCommand extends Commando.Command {
 class InviteCommand extends Commando.Command {
   constructor(client) {
     super(client, {
-      name: 'invite',
+      name: 'legacy-invite',
       group: 'lancer',
-      memberName: 'invite',
+      memberName: 'legacy-invite',
       description: 'Get an invite link for UNCLE',
       guildOnly: false
     })
@@ -103,10 +103,9 @@ const { FaqCommand, FaqSlashCommand } = require('./faq')
 class StructureCommand extends Commando.Command {
   constructor(client) {
     super(client, {
-      name: 'structure',
-      aliases: ['structure-check', 'structure_check', 'structure-damage', 'structure_damage'],
+      name: 'legacy-structure',
       group: 'lancer',
-      memberName: 'structure',
+      memberName: 'legacy-structure',
       description: 'Look up an entry on the structure check table. Parameters: Lowest dice rolled, Mech\'s remaining structure',
       guildOnly: false,
       args: [
@@ -132,10 +131,9 @@ class StructureCommand extends Commando.Command {
 class StressCommand extends Commando.Command {
   constructor(client) {
     super(client, {
-      name: 'stress',
-      aliases: ['stress-check', 'stress_check', 'overheating'],
+      name: 'legacy-stress',
       group: 'lancer',
-      memberName: 'stress',
+      memberName: 'legacy-stress',
       description: 'Look up an entry on the Stress/Overheating table. Parameters: Lowest dice rolled, Mech\'s remaining stress',
       guildOnly: false,
       args: [

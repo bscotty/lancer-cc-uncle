@@ -72,25 +72,26 @@ async function getQuestion(searchStr) {
 
 
 
-  export class FaqCommand extends Commando.Command {
+  class FaqCommand extends Commando.Command {
     constructor(client) {
       super(client, {
-        name: 'faq',
+        name: 'legacy-faq',
         group: 'lancer',
-        memberName: 'faq',
+        memberName: 'legacy-faq',
         description: 'Look up an entry in the Lancer FAQ/Errata, available here: https://lancer-faq.netlify.app',
         argsType: 'single',
         guildOnly: false
       })
     }
     async run(msg, arg) {
+      console.log("Message Command -- FAQ")
       console.log(arg);
       const out = await getQuestion(arg);
       await msg.reply(out, { split: true })
     }
   }
 
-  export class FaqSlashCommand extends Commando.Command {
+  class FaqSlashCommand extends Commando.Command {
     constructor(client) {
       super(client, {
         name: 'faq',
@@ -108,9 +109,12 @@ async function getQuestion(searchStr) {
       })
     }
     async run(msg, arg) {
+      console.log("Slash Command -- FAQ")
       const question = arg.question
       console.log(question);
       const out = await getQuestion(question);
       await msg.reply(out, { split: true })
     }
   }
+
+  module.exports = { FaqCommand, FaqSlashCommand }
