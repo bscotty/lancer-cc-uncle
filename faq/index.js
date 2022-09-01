@@ -84,7 +84,6 @@ async function getQuestion(searchStr) {
       })
     }
     async run(msg, arg) {
-      console.log("Message Command -- FAQ")
       console.log(arg);
       const out = await getQuestion(arg);
       await msg.reply(out, { split: true })
@@ -109,7 +108,6 @@ async function getQuestion(searchStr) {
       })
     }
     async run(msg, arg) {
-      console.log("Slash Command -- FAQ")
       const question = arg.question
       console.log(question);
       const out = await getQuestion(question);

@@ -23,7 +23,7 @@ const client = new Commando.Client({
   intents: ['GUILDS', 'GUILD_MESSAGES', 'DIRECT_MESSAGES']
 })
 
-client.once('ready', () => {
+client.once('ready', async () => {
   console.log(`Logged in as ${client.user.tag}! (${client.user.id})`)
   client.user.setActivity('LANCER | use /commands')
 })
@@ -39,7 +39,6 @@ class DmCommand extends Commando.Command {
     })
   }
   async run(msg) {
-    console.log("Message Command -- DM")
     await msg.author.send("Added your DM to my cached channels. You can now DM me commands.")
   }
 }
@@ -58,7 +57,6 @@ class SearchCommand extends Commando.Command {
     })
   }
   async run(msg) {
-    console.log("Message Command -- Search")
     //console.log(msg.content)
     let targets = [];
     //Identify a searchable term.
@@ -317,6 +315,15 @@ client.registry
       StressSlashCommand
   ])
 
-client.login(process.env.TOKEN).then(async () => {
-  await client.registry.registerSlashGlobally()
-})
+client.login(process.env.TOKEN)
+    .then(async () => {
+      client.guilds.cache.forEach((guild) => {
+        console.log(`registering commands to guild ${guild.id}`)
+        client.registry.registerSlashInGuild(guild)
+      })
+
+      client.on("guildCreate", async (guild) => {
+        console.log(`Joining guild ${guild.id}`)
+        await client.registry.registerSlashInGuild(guild)
+      })
+    })
